@@ -51,6 +51,18 @@ test('resolveFromGit() with tag', async t => {
   t.end()
 })
 
+test('resolveFromGit() with tag (v-prefixed tag)', async t => {
+  const resolveResult = await resolveFromGit({pref: 'andreineculau/npm-publish-git#v0.0.7'})
+  t.deepEqual(resolveResult, {
+    id: 'github.com/andreineculau/npm-publish-git/a2f8d94562884e9529cb12c0818312ac87ab7f0b',
+    normalizedPref: 'github:andreineculau/npm-publish-git#v0.0.7',
+    resolution: {
+      tarball: 'https://codeload.github.com/andreineculau/npm-publish-git/tar.gz/a2f8d94562884e9529cb12c0818312ac87ab7f0b'
+    }
+  })
+  t.end()
+})
+
 test('resolveFromGit() with strict semver', async t => {
   const resolveResult = await resolveFromGit({pref: 'zkochan/is-negative#semver:1.0.0'})
   t.deepEqual(resolveResult, {
@@ -63,6 +75,18 @@ test('resolveFromGit() with strict semver', async t => {
   t.end()
 })
 
+test('resolveFromGit() with strict semver (v-prefixed tag)', async t => {
+  const resolveResult = await resolveFromGit({pref: 'andreineculau/npm-publish-git#semver:v0.0.7'})
+  t.deepEqual(resolveResult, {
+    id: 'github.com/andreineculau/npm-publish-git/a2f8d94562884e9529cb12c0818312ac87ab7f0b',
+    normalizedPref: 'github:andreineculau/npm-publish-git#semver:v0.0.7',
+    resolution: {
+      tarball: 'https://codeload.github.com/andreineculau/npm-publish-git/tar.gz/a2f8d94562884e9529cb12c0818312ac87ab7f0b'
+    }
+  })
+  t.end()
+})
+
 test('resolveFromGit() with range semver', async t => {
   const resolveResult = await resolveFromGit({pref: 'zkochan/is-negative#semver:^1.0.0'})
   t.deepEqual(resolveResult, {
@@ -70,6 +94,18 @@ test('resolveFromGit() with range semver', async t => {
     normalizedPref: 'github:zkochan/is-negative#semver:^1.0.0',
     resolution: {
       tarball: 'https://codeload.github.com/zkochan/is-negative/tar.gz/9a89df745b2ec20ae7445d3d9853ceaeef5b0b72'
+    }
+  })
+  t.end()
+})
+
+test('resolveFromGit() with range semver (v-prefixed tag)', async t => {
+  const resolveResult = await resolveFromGit({pref: 'andreineculau/npm-publish-git#semver:<=v0.0.7'})
+  t.deepEqual(resolveResult, {
+    id: 'github.com/andreineculau/npm-publish-git/a2f8d94562884e9529cb12c0818312ac87ab7f0b',
+    normalizedPref: 'github:andreineculau/npm-publish-git#semver:<=v0.0.7',
+    resolution: {
+      tarball: 'https://codeload.github.com/andreineculau/npm-publish-git/tar.gz/a2f8d94562884e9529cb12c0818312ac87ab7f0b'
     }
   })
   t.end()

@@ -124,7 +124,7 @@ function resolveRefFromRefs (refs: {[ref: string]: string}, repo: string, ref: s
       .filter((key: string) => /^refs\/tags\/v?(\d+\.\d+\.\d+(?:[-+].+)?)(\^{})?$/.test(key))
       .map((key: string) => {
         return key
-          .replace(/^refs\/tags\/v?/, '')
+          .replace(/^refs\/tags\//, '')
           .replace(/\^{}$/, '') // accept annotated tags
       })
       .filter((key: string) => semver.valid(key, true))
